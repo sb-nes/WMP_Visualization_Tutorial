@@ -3,7 +3,7 @@ Creating custom visualizations for Windows Media Player in Visual Studio using V
 
 ### Requirements:
 1. Visual Studio 2008 Professional (I'm currently using this, haven't tested on newer versions. VS2008 Express doesn't natively work. Older will work till 2003 I think.)
-2. Windows SDK for Windows 7 and .NET Framework 4 [Get the ISO while it's live](https://www.microsoft.com/en-in/download/details.aspx?id=8442)
+2. Windows SDK for Windows 7 and .NET Framework 4 ([Get the ISO while it's live](https://www.microsoft.com/en-in/download/details.aspx?id=8442))
 3. Windows Driver Kit [I'm not sure, I'll try and tell.]
 
 ### References:
