@@ -6,6 +6,11 @@ Creating custom visualizations for Windows Media Player in Visual Studio using V
 2. Windows SDK for Windows 7 and .NET Framework 4 ([Get the ISO while it's live](https://www.microsoft.com/en-in/download/details.aspx?id=8442))
 3. Windows Driver Kit [I'm not sure, I'll try and tell.]
 
+
+### Several Questions that I have:
+1. If I compile with Target System as x64, will it work? also, is Win32 required?
+2. Documentation said I can use DirectX with it. Well, How??? 
+
 ### References:
 1. [Windows Media Player Custom Visualization](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmp/windows-media-player-custom-visualizations)
 2. [Building a Plug-in: Windows Media Player](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wmp/building-a-plug-in)
