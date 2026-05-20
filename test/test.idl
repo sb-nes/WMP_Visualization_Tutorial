@@ -1,0 +1,40 @@
+// itest.idl : IDL source for test.dll
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+// This file will be processed by the MIDL tool to
+// produce the type library (itest.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+    [
+        object,
+        uuid(9E9E5FCF-D7FF-4D18-83D4-1431873B4CE1),
+        dual,
+        helpstring("ITest Interface"),
+        pointer_default(unique)
+    ]
+    interface ITest : IDispatch
+    {
+        [propget, id(1), helpstring("property foregroundColor")] HRESULT foregroundColor([out, retval] BSTR *pVal);
+        [propput, id(1), helpstring("property foregroundColor")] HRESULT foregroundColor([in] BSTR newVal);
+    };
+
+[
+    uuid(3B956868-12F8-41F2-80D6-3AC1D0680103),
+    version(1.0),
+    helpstring("Test 1.0 Type Library")
+]
+library TESTLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [
+        uuid(97A3157A-9CD1-43AD-9768-D74EC22ECA1E),
+        helpstring("Test Class")
+    ]
+    coclass Test
+    {
+        [default] interface ITest;
+    };
+};

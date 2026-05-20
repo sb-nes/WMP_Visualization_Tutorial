@@ -1,0 +1,29 @@
+HKCR {
+    NoRemove CLSID {
+        ForceRemove {97A3157A-9CD1-43AD-9768-D74EC22ECA1E} = s 'Test Class' {
+            InprocServer32 = s '%MODULE%' {
+                val ThreadingModel = s 'Apartment'
+            }
+            'TypeLib' = s '{3B956868-12F8-41F2-80D6-3AC1D0680103}'
+        }
+    }
+}
+HKEY_LOCAL_MACHINE {
+    NoRemove SOFTWARE {
+        NoRemove Microsoft {
+            NoRemove MediaPlayer {
+                NoRemove Objects {
+                    NoRemove Effects {
+                        ForceRemove Test {
+                            Properties {
+                                val classid = s '{97A3157A-9CD1-43AD-9768-D74EC22ECA1E}'
+                                val name = s 'res://test.dll/RT_STRING/#101'
+                                val description = s 'res://test.dll/RT_STRING/#105'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
