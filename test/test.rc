@@ -122,6 +122,7 @@ BEGIN
     IDS_REDPRESETNAME       "Glow Red"
     IDS_GREENPRESETNAME     "Glow Green"
     IDS_BLUEPRESETNAME      "Glow Blue"
+    IDS_WHITEPRESETNAME     "Glow White"
     IDS_DESCRIPTION         "Description of Test plugin"
 END
 

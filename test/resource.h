@@ -9,9 +9,10 @@
 #define IDS_SCOPEPRESETNAME             103
 #define IDS_GREENPRESETNAME             103
 #define IDS_BLUEPRESETNAME              104
-#define IDR_TEST                        105
-#define IDS_DESCRIPTION                 106
-#define IDD_PROPERTYDIALOG              107
+#define IDS_WHITEPRESETNAME             105
+#define IDR_TEST                        106
+#define IDS_DESCRIPTION                 107
+#define IDD_PROPERTYDIALOG              108
 #define IDC_MESSAGEEDIT                 1000
 
 // Next default values for new objects

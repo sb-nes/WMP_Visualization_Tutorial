@@ -45,7 +45,7 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -180,6 +180,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\audio\audioEfx.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StdAfx.cpp"
 				>
 				<FileConfiguration
@@ -219,12 +223,20 @@
 				RelativePath=".\testevents.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\utility\utility.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\audio\audioEfx.h"
+				>
+			</File>
 			<File
 				RelativePath=".\CPropertyDialog.h"
 				>
@@ -239,6 +251,10 @@
 			</File>
 			<File
 				RelativePath=".\test.h"
+				>
+			</File>
+			<File
+				RelativePath=".\utility\utility.h"
 				>
 			</File>
 		</Filter>

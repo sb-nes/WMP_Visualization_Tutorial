@@ -13,6 +13,10 @@
 #include "effects.h" // for TimedLevel
 #include "test_h.h"
 
+// My Code
+#include "utility/utility.h"
+#include "audio/audioEfx.h"
+
 // preset values
 /*
 enum {
@@ -26,6 +30,7 @@ enum {
     PRESET_RED = 0,
     PRESET_GREEN,
 	PRESET_BLUE,
+	PRESET_WHITE,
     PRESET_COUNT
 };
 

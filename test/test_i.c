@@ -6,7 +6,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0500 */
-/* at Wed May 20 14:01:43 2026
+/* at Wed May 20 16:19:38 2026
  */
 /* Compiler settings for .\test.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)

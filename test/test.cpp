@@ -45,6 +45,16 @@ void CTest::FinalRelease() { ReleaseCore(); }
 // CTest::Render
 // Called when an effect should render itself to the screen.
 //////////////////////////////////////////////////////////////////////////////
+int _x_count = 0;
+
+int size = 50;
+int speed = 3;
+
+::HRGN createCircle(int radius, int x, int y){
+	::HRGN elp = ::CreateEllipticRgn(x-radius, y-radius, x+radius, y+radius);
+	return elp;
+}
+
 STDMETHODIMP CTest::Render(TimedLevel *pLevels, HDC hdc, RECT *prc) {
 	/*{
     // Fill background with black
@@ -72,23 +82,11 @@ STDMETHODIMP CTest::Render(TimedLevel *pLevels, HDC hdc, RECT *prc) {
                 ::LineTo(hdc, x, y); 
             }
         break;
-
-		case PRESET_BLANK:
-			//int y = static_cast<int>(((prc->bottom - prc->top)/256.0f) * pLevels->waveform[0][0]);
-		break;
-    }
-        
-    if (hNewBrush) { ::DeleteObject( hNewBrush ); }
-
-    if (hNewPen) {
-        ::SelectObject( hdc, hOldPen );
-        ::DeleteObject( hNewPen );
-    }
 	}*/
     
 	COLORREF mycolour;
     //int mylevel = pLevels->waveform[0][0];
-    int mylevel = pLevels->frequency[0][1]; // [20 Hz, 22,050 Hz] => Total Range = 22,030 -> [0-255] (Sampled) || STEP SIZE = ??? || SA_BUFFER_SIZE = 1024 by default
+    int mylevel = pLevels->frequency[0][2]; // [20 Hz, 22,050 Hz] => Total Range = 22,030 -> [0-255] (Sampled) || STEP SIZE = ??? || SA_BUFFER_SIZE = 1024 by default
 	::UINT32 colhex;
 
     switch (m_nPreset) {
@@ -103,15 +101,45 @@ STDMETHODIMP CTest::Render(TimedLevel *pLevels, HDC hdc, RECT *prc) {
 		// #014B43
 		case PRESET_BLUE: { colhex = 0x014B43; }
         break;
-    }
 
+		case PRESET_WHITE: { colhex = 0xFFFFFF; }
+		break;
+    }
+	mylevel = audioEfx::gate(mylevel, 190, 10, 0.3f);
 	mycolour = RGB(mylevel * (colhex >> 16)/0xFF, mylevel * ((colhex >> 8)&0xFF)/0xFF, mylevel * (colhex&0xFF)/0xFF);
 
     HBRUSH hNewBrush = ::CreateSolidBrush( mycolour );
-    ::FillRect( hdc, prc, hNewBrush );
+    HBRUSH bBlack = ::CreateSolidBrush( 0 );
+    ::FillRect( hdc, prc, bBlack );
 
-	// Destroy Resources such as Pens and Brushes
-    if (hNewBrush) { ::DeleteObject( hNewBrush ); }
+	::HRGN rgn1 = createCircle(size, _x_count, prc->bottom/2);
+	::HRGN rgn2 = createCircle(size, utl::overlap(_x_count+prc->right, -size, (prc->right*2)-size), prc->bottom/2);
+
+	_x_count += speed; _x_count = _x_count > prc->right? 0: _x_count; 
+
+	::FillRgn(hdc, rgn1, hNewBrush);
+	::FillRgn(hdc, rgn2, hNewBrush);
+
+	//::Ellipse(hdc, prc->left, prc->top, prc->right, prc->bottom);
+
+    HPEN hNewPen = ::CreatePen( PS_SOLID, 0, 0 );
+    HPEN hOldPen = static_cast<HPEN>(::SelectObject( hdc, hNewPen )); // You need to cast the pen object you created and store it as an old pen.
+
+	//::MoveToEx( hdc, 0, prc->top, NULL );  
+	//::LineTo(hdc, 320, prc->bottom); 
+
+	// Destroy Resources such as Pens and Brushes, Even Regions
+    if (hNewBrush) { 
+		::DeleteObject( hNewBrush ); 
+		::DeleteObject( bBlack ); 
+		::DeleteObject( rgn1 ); 
+		::DeleteObject( rgn2 ); 
+	}
+
+	if (hNewPen) {
+        ::SelectObject( hdc, hOldPen );
+        ::DeleteObject( hNewPen );
+    }
 
     return S_OK;
 }
@@ -209,18 +237,21 @@ STDMETHODIMP CTest::GetPresetTitle(LONG nPreset, BSTR *bstrPresetTitle)
         break;
     } */
 
-	switch (nPreset)
-    {
-    case PRESET_RED:
+	switch (nPreset) {
+		case PRESET_RED:
         bstrTemp.LoadString(IDS_REDPRESETNAME); 
         break;
 
-    case PRESET_GREEN:
+		case PRESET_GREEN:
         bstrTemp.LoadString(IDS_GREENPRESETNAME); 
         break;
 
-    case PRESET_BLUE:
+		case PRESET_BLUE:
         bstrTemp.LoadString(IDS_BLUEPRESETNAME); 
+        break;
+
+		case PRESET_WHITE:
+        bstrTemp.LoadString(IDS_WHITEPRESETNAME); 
         break;
     }
     
